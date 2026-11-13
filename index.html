@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet.photon.css">
         <style>
         html, body, #map {
@@ -35,12 +37,15 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet.photon.js"></script>
-        <script src="data/Ghana_boundary_1.js"></script>
-        <script src="data/Ghana_regions_2.js"></script>
-        <script src="data/Regions_of_interventions_3.js"></script>
-        <script src="data/FAO_Intervention_districts_4.js"></script>
-        <script src="data/Regions_of_interventionscopy_5.js"></script>
-        <script src="data/Intervention_communities_6.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/Ghanaboundary_1.js"></script>
+        <script src="data/Ghanaregions_2.js"></script>
+        <script src="data/Regionsofintervention_3.js"></script>
+        <script src="data/FAOInterventiondistricts_4.js"></script>
+        <script src="data/Regionsofinterventionsboundary_5.js"></script>
+        <script src="data/FAOInterventionCommunitiesbyDonor_6.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -49,7 +54,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[5.267748442896131,-4.601683535394358],[11.28935488899614,1.8761052172283779]]);
+        }).fitBounds([[5.238455861077233,-4.990056430045936],[11.260062307177241,2.7827314825219323]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/qgis2web/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -130,6 +135,8 @@
         }).addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
+            map.setMaxBounds(map.getBounds());
+            map.setMinZoom(map.getZoom());
         }
         map.createPane('pane_OSMStandard_0');
         map.getPane('pane_OSMStandard_0').style.zIndex = 400;
@@ -144,7 +151,7 @@
         });
         layer_OSMStandard_0;
         map.addLayer(layer_OSMStandard_0);
-        function pop_Ghana_boundary_1(feature, layer) {
+        function pop_Ghanaboundary_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -196,34 +203,34 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Ghana_boundary_1_0() {
+        function style_Ghanaboundary_1_0() {
             return {
-                pane: 'pane_Ghana_boundary_1',
+                pane: 'pane_Ghanaboundary_1',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 2.0,
+                weight: 3.0,
                 fillOpacity: 0,
                 interactive: false,
             }
         }
-        map.createPane('pane_Ghana_boundary_1');
-        map.getPane('pane_Ghana_boundary_1').style.zIndex = 401;
-        map.getPane('pane_Ghana_boundary_1').style['mix-blend-mode'] = 'normal';
-        var layer_Ghana_boundary_1 = new L.geoJson(json_Ghana_boundary_1, {
+        map.createPane('pane_Ghanaboundary_1');
+        map.getPane('pane_Ghanaboundary_1').style.zIndex = 401;
+        map.getPane('pane_Ghanaboundary_1').style['mix-blend-mode'] = 'normal';
+        var layer_Ghanaboundary_1 = new L.geoJson(json_Ghanaboundary_1, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Ghana_boundary_1',
-            layerName: 'layer_Ghana_boundary_1',
-            pane: 'pane_Ghana_boundary_1',
-            onEachFeature: pop_Ghana_boundary_1,
-            style: style_Ghana_boundary_1_0,
+            dataVar: 'json_Ghanaboundary_1',
+            layerName: 'layer_Ghanaboundary_1',
+            pane: 'pane_Ghanaboundary_1',
+            onEachFeature: pop_Ghanaboundary_1,
+            style: style_Ghanaboundary_1_0,
         });
-        bounds_group.addLayer(layer_Ghana_boundary_1);
-        map.addLayer(layer_Ghana_boundary_1);
-        function pop_Ghana_regions_2(feature, layer) {
+        bounds_group.addLayer(layer_Ghanaboundary_1);
+        map.addLayer(layer_Ghanaboundary_1);
+        function pop_Ghanaregions_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -281,9 +288,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Ghana_regions_2_0() {
+        function style_Ghanaregions_2_0() {
             return {
-                pane: 'pane_Ghana_regions_2',
+                pane: 'pane_Ghanaregions_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -294,21 +301,21 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_Ghana_regions_2');
-        map.getPane('pane_Ghana_regions_2').style.zIndex = 402;
-        map.getPane('pane_Ghana_regions_2').style['mix-blend-mode'] = 'normal';
-        var layer_Ghana_regions_2 = new L.geoJson(json_Ghana_regions_2, {
+        map.createPane('pane_Ghanaregions_2');
+        map.getPane('pane_Ghanaregions_2').style.zIndex = 402;
+        map.getPane('pane_Ghanaregions_2').style['mix-blend-mode'] = 'normal';
+        var layer_Ghanaregions_2 = new L.geoJson(json_Ghanaregions_2, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Ghana_regions_2',
-            layerName: 'layer_Ghana_regions_2',
-            pane: 'pane_Ghana_regions_2',
-            onEachFeature: pop_Ghana_regions_2,
-            style: style_Ghana_regions_2_0,
+            dataVar: 'json_Ghanaregions_2',
+            layerName: 'layer_Ghanaregions_2',
+            pane: 'pane_Ghanaregions_2',
+            onEachFeature: pop_Ghanaregions_2,
+            style: style_Ghanaregions_2_0,
         });
-        bounds_group.addLayer(layer_Ghana_regions_2);
-        map.addLayer(layer_Ghana_regions_2);
-        function pop_Regions_of_interventions_3(feature, layer) {
+        bounds_group.addLayer(layer_Ghanaregions_2);
+        map.addLayer(layer_Ghanaregions_2);
+        function pop_Regionsofintervention_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -366,28 +373,28 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Regions_of_interventions_3_0(feature) {
+        function style_Regionsofintervention_3_0(feature) {
             switch(String(feature.properties['ADM1_EN'])) {
                 case 'North East':
                     return {
-                pane: 'pane_Regions_of_interventions_3',
+                pane: 'pane_Regionsofintervention_3',
                 opacity: 1,
-                color: 'rgba(253,191,111,0.0)',
+                color: 'rgba(0,0,0,0.25098039215686274)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 4.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(141,211,199,1.0)',
+                fillColor: 'rgba(141,211,199,0.9019607843137255)',
                 interactive: false,
             }
                     break;
                 case 'Savannah':
                     return {
-                pane: 'pane_Regions_of_interventions_3',
+                pane: 'pane_Regionsofintervention_3',
                 opacity: 1,
-                color: 'rgba(253,191,111,0.0)',
+                color: 'rgba(0,0,0,0.27450980392156865)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -400,9 +407,9 @@
                     break;
                 case 'Upper East':
                     return {
-                pane: 'pane_Regions_of_interventions_3',
+                pane: 'pane_Regionsofintervention_3',
                 opacity: 1,
-                color: 'rgba(253,191,111,0.0)',
+                color: 'rgba(0,0,0,0.2784313725490196)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -415,21 +422,21 @@
                     break;
             }
         }
-        map.createPane('pane_Regions_of_interventions_3');
-        map.getPane('pane_Regions_of_interventions_3').style.zIndex = 403;
-        map.getPane('pane_Regions_of_interventions_3').style['mix-blend-mode'] = 'normal';
-        var layer_Regions_of_interventions_3 = new L.geoJson(json_Regions_of_interventions_3, {
+        map.createPane('pane_Regionsofintervention_3');
+        map.getPane('pane_Regionsofintervention_3').style.zIndex = 403;
+        map.getPane('pane_Regionsofintervention_3').style['mix-blend-mode'] = 'normal';
+        var layer_Regionsofintervention_3 = new L.geoJson(json_Regionsofintervention_3, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Regions_of_interventions_3',
-            layerName: 'layer_Regions_of_interventions_3',
-            pane: 'pane_Regions_of_interventions_3',
-            onEachFeature: pop_Regions_of_interventions_3,
-            style: style_Regions_of_interventions_3_0,
+            dataVar: 'json_Regionsofintervention_3',
+            layerName: 'layer_Regionsofintervention_3',
+            pane: 'pane_Regionsofintervention_3',
+            onEachFeature: pop_Regionsofintervention_3,
+            style: style_Regionsofintervention_3_0,
         });
-        bounds_group.addLayer(layer_Regions_of_interventions_3);
-        map.addLayer(layer_Regions_of_interventions_3);
-        function pop_FAO_Intervention_districts_4(feature, layer) {
+        bounds_group.addLayer(layer_Regionsofintervention_3);
+        map.addLayer(layer_Regionsofintervention_3);
+        function pop_FAOInterventiondistricts_4(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -444,12 +451,10 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Region</th>\
-                        <td>' + (feature.properties['Region'] !== null ? autolinker.link(String(feature.properties['Region']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Region'] !== null ? autolinker.link(String(feature.properties['Region']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">District</th>\
-                        <td>' + (feature.properties['District'] !== null ? autolinker.link(String(feature.properties['District']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['District'] !== null ? autolinker.link(String(feature.properties['District']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
@@ -459,11 +464,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_FAO_Intervention_districts_4_0() {
+        function style_FAOInterventiondistricts_4_0() {
             return {
-                pane: 'pane_FAO_Intervention_districts_4',
+                pane: 'pane_FAOInterventiondistricts_4',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.9019607843137255)',
+                color: 'rgba(35,35,35,0.5176470588235295)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -474,21 +479,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_FAO_Intervention_districts_4');
-        map.getPane('pane_FAO_Intervention_districts_4').style.zIndex = 404;
-        map.getPane('pane_FAO_Intervention_districts_4').style['mix-blend-mode'] = 'normal';
-        var layer_FAO_Intervention_districts_4 = new L.geoJson(json_FAO_Intervention_districts_4, {
+        map.createPane('pane_FAOInterventiondistricts_4');
+        map.getPane('pane_FAOInterventiondistricts_4').style.zIndex = 404;
+        map.getPane('pane_FAOInterventiondistricts_4').style['mix-blend-mode'] = 'normal';
+        var layer_FAOInterventiondistricts_4 = new L.geoJson(json_FAOInterventiondistricts_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_FAO_Intervention_districts_4',
-            layerName: 'layer_FAO_Intervention_districts_4',
-            pane: 'pane_FAO_Intervention_districts_4',
-            onEachFeature: pop_FAO_Intervention_districts_4,
-            style: style_FAO_Intervention_districts_4_0,
+            dataVar: 'json_FAOInterventiondistricts_4',
+            layerName: 'layer_FAOInterventiondistricts_4',
+            pane: 'pane_FAOInterventiondistricts_4',
+            onEachFeature: pop_FAOInterventiondistricts_4,
+            style: style_FAOInterventiondistricts_4_0,
         });
-        bounds_group.addLayer(layer_FAO_Intervention_districts_4);
-        map.addLayer(layer_FAO_Intervention_districts_4);
-        function pop_Regions_of_interventionscopy_5(feature, layer) {
+        bounds_group.addLayer(layer_FAOInterventiondistricts_4);
+        map.addLayer(layer_FAOInterventiondistricts_4);
+        function pop_Regionsofinterventionsboundary_5(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -546,9 +551,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Regions_of_interventionscopy_5_0() {
+        function style_Regionsofinterventionsboundary_5_0() {
             return {
-                pane: 'pane_Regions_of_interventionscopy_5',
+                pane: 'pane_Regionsofinterventionsboundary_5',
                 opacity: 1,
                 color: 'rgba(230,18,18,1.0)',
                 dashArray: '',
@@ -559,21 +564,21 @@
                 interactive: false,
             }
         }
-        map.createPane('pane_Regions_of_interventionscopy_5');
-        map.getPane('pane_Regions_of_interventionscopy_5').style.zIndex = 405;
-        map.getPane('pane_Regions_of_interventionscopy_5').style['mix-blend-mode'] = 'normal';
-        var layer_Regions_of_interventionscopy_5 = new L.geoJson(json_Regions_of_interventionscopy_5, {
+        map.createPane('pane_Regionsofinterventionsboundary_5');
+        map.getPane('pane_Regionsofinterventionsboundary_5').style.zIndex = 405;
+        map.getPane('pane_Regionsofinterventionsboundary_5').style['mix-blend-mode'] = 'normal';
+        var layer_Regionsofinterventionsboundary_5 = new L.geoJson(json_Regionsofinterventionsboundary_5, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Regions_of_interventionscopy_5',
-            layerName: 'layer_Regions_of_interventionscopy_5',
-            pane: 'pane_Regions_of_interventionscopy_5',
-            onEachFeature: pop_Regions_of_interventionscopy_5,
-            style: style_Regions_of_interventionscopy_5_0,
+            dataVar: 'json_Regionsofinterventionsboundary_5',
+            layerName: 'layer_Regionsofinterventionsboundary_5',
+            pane: 'pane_Regionsofinterventionsboundary_5',
+            onEachFeature: pop_Regionsofinterventionsboundary_5,
+            style: style_Regionsofinterventionsboundary_5_0,
         });
-        bounds_group.addLayer(layer_Regions_of_interventionscopy_5);
-        map.addLayer(layer_Regions_of_interventionscopy_5);
-        function pop_Intervention_communities_6(feature, layer) {
+        bounds_group.addLayer(layer_Regionsofinterventionsboundary_5);
+        map.addLayer(layer_Regionsofinterventionsboundary_5);
+        function pop_FAOInterventionCommunitiesbyDonor_6(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -635,11 +640,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Intervention_communities_6_0(feature) {
+        function style_FAOInterventionCommunitiesbyDonor_6_0(feature) {
             switch(String(feature.properties['Donor'])) {
                 case 'Canada':
                     return {
-                pane: 'pane_Intervention_communities_6',
+                pane: 'pane_FAOInterventionCommunitiesbyDonor_6',
                 radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -655,7 +660,7 @@
                     break;
                 case 'European Union':
                     return {
-                pane: 'pane_Intervention_communities_6',
+                pane: 'pane_FAOInterventionCommunitiesbyDonor_6',
                 radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -671,7 +676,7 @@
                     break;
                 case 'The Kingdom of Norway':
                     return {
-                pane: 'pane_Intervention_communities_6',
+                pane: 'pane_FAOInterventionCommunitiesbyDonor_6',
                 radius: 5.2,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -687,34 +692,34 @@
                     break;
             }
         }
-        map.createPane('pane_Intervention_communities_6');
-        map.getPane('pane_Intervention_communities_6').style.zIndex = 406;
-        map.getPane('pane_Intervention_communities_6').style['mix-blend-mode'] = 'normal';
-        var layer_Intervention_communities_6 = new L.geoJson(json_Intervention_communities_6, {
+        map.createPane('pane_FAOInterventionCommunitiesbyDonor_6');
+        map.getPane('pane_FAOInterventionCommunitiesbyDonor_6').style.zIndex = 406;
+        map.getPane('pane_FAOInterventionCommunitiesbyDonor_6').style['mix-blend-mode'] = 'normal';
+        var layer_FAOInterventionCommunitiesbyDonor_6 = new L.geoJson(json_FAOInterventionCommunitiesbyDonor_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Intervention_communities_6',
-            layerName: 'layer_Intervention_communities_6',
-            pane: 'pane_Intervention_communities_6',
-            onEachFeature: pop_Intervention_communities_6,
+            dataVar: 'json_FAOInterventionCommunitiesbyDonor_6',
+            layerName: 'layer_FAOInterventionCommunitiesbyDonor_6',
+            pane: 'pane_FAOInterventionCommunitiesbyDonor_6',
+            onEachFeature: pop_FAOInterventionCommunitiesbyDonor_6,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Intervention_communities_6_0(feature));
+                return L.circleMarker(latlng, style_FAOInterventionCommunitiesbyDonor_6_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Intervention_communities_6);
-        map.addLayer(layer_Intervention_communities_6);
+        bounds_group.addLayer(layer_FAOInterventionCommunitiesbyDonor_6);
+        map.addLayer(layer_FAOInterventionCommunitiesbyDonor_6);
         var overlaysTree = [
         {label: '<b>FAO_Promramme_Interventions</b>',  selectAllCheckbox: true, children: [
-            {label: 'Intervention_communities<br /><table><tr><td style="text-align: center;"><img src="legend/Intervention_communities_6_Canada0.png" /></td><td>Canada</td></tr><tr><td style="text-align: center;"><img src="legend/Intervention_communities_6_EuropeanUnion1.png" /></td><td>European Union</td></tr><tr><td style="text-align: center;"><img src="legend/Intervention_communities_6_TheKingdomofNorway2.png" /></td><td>The Kingdom of Norway</td></tr></table>', layer: layer_Intervention_communities_6},
-            {label: '<img src="legend/Regions_of_interventionscopy_5.png" /> Regions_of_interventions copy', layer: layer_Regions_of_interventionscopy_5},
-            {label: '<img src="legend/FAO_Intervention_districts_4.png" /> FAO_Intervention_districts', layer: layer_FAO_Intervention_districts_4},
-            {label: 'Regions_of_interventions<br /><table><tr><td style="text-align: center;"><img src="legend/Regions_of_interventions_3_NorthEast0.png" /></td><td>North East</td></tr><tr><td style="text-align: center;"><img src="legend/Regions_of_interventions_3_Savannah1.png" /></td><td>Savannah</td></tr><tr><td style="text-align: center;"><img src="legend/Regions_of_interventions_3_UpperEast2.png" /></td><td>Upper East</td></tr></table>', layer: layer_Regions_of_interventions_3},
-            {label: '<img src="legend/Ghana_regions_2.png" /> Ghana_regions', layer: layer_Ghana_regions_2},
-            {label: '<img src="legend/Ghana_boundary_1.png" /> Ghana_boundary', layer: layer_Ghana_boundary_1},]},
+            {label: 'FAO Intervention Communities by Donor<br /><table><tr><td style="text-align: center;"><img src="legend/FAOInterventionCommunitiesbyDonor_6_Canada0.png" /></td><td>Canada</td></tr><tr><td style="text-align: center;"><img src="legend/FAOInterventionCommunitiesbyDonor_6_EuropeanUnion1.png" /></td><td>European Union</td></tr><tr><td style="text-align: center;"><img src="legend/FAOInterventionCommunitiesbyDonor_6_TheKingdomofNorway2.png" /></td><td>The Kingdom of Norway</td></tr></table>', layer: layer_FAOInterventionCommunitiesbyDonor_6},
+            {label: '<img src="legend/Regionsofinterventionsboundary_5.png" /> Regions of interventions boundary', layer: layer_Regionsofinterventionsboundary_5},
+            {label: '<img src="legend/FAOInterventiondistricts_4.png" /> FAO Intervention districts', layer: layer_FAOInterventiondistricts_4},
+            {label: 'Regions of intervention<br /><table><tr><td style="text-align: center;"><img src="legend/Regionsofintervention_3_NorthEast0.png" /></td><td>North East</td></tr><tr><td style="text-align: center;"><img src="legend/Regionsofintervention_3_Savannah1.png" /></td><td>Savannah</td></tr><tr><td style="text-align: center;"><img src="legend/Regionsofintervention_3_UpperEast2.png" /></td><td>Upper East</td></tr></table>', layer: layer_Regionsofintervention_3},
+            {label: '<img src="legend/Ghanaregions_2.png" /> Ghana regions', layer: layer_Ghanaregions_2},
+            {label: '<img src="legend/Ghanaboundary_1.png" /> Ghana boundary', layer: layer_Ghanaboundary_1},]},
             {label: "OSM Standard", layer: layer_OSMStandard_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -723,19 +728,247 @@
             //openedSymbol: '&#8863; &#x1f5c1;',
             //collapseAll: 'Collapse all',
             //expandAll: 'Expand all',
-            collapsed: true,
+            collapsed: false, 
         });
         lay.addTo(map);
+		document.addEventListener("DOMContentLoaded", function() {
+            // set new Layers List height which considers toggle icon
+            function newLayersListHeight() {
+                var layerScrollbarElement = document.querySelector('.leaflet-control-layers-scrollbar');
+                if (layerScrollbarElement) {
+                    var layersListElement = document.querySelector('.leaflet-control-layers-list');
+                    var originalHeight = layersListElement.style.height 
+                        || window.getComputedStyle(layersListElement).height;
+                    var newHeight = parseFloat(originalHeight) - 50;
+                    layersListElement.style.height = newHeight + 'px';
+                }
+            }
+            var isLayersListExpanded = true;
+            var controlLayersElement = document.querySelector('.leaflet-control-layers');
+            var toggleLayerControl = document.querySelector('.leaflet-control-layers-toggle');
+            // toggle Collapsed/Expanded and apply new Layers List height
+            toggleLayerControl.addEventListener('click', function() {
+                if (isLayersListExpanded) {
+                    controlLayersElement.classList.remove('leaflet-control-layers-expanded');
+                } else {
+                    controlLayersElement.classList.add('leaflet-control-layers-expanded');
+                }
+                isLayersListExpanded = !isLayersListExpanded;
+                newLayersListHeight()
+            });	
+			// apply new Layers List height if toggle layerstree
+			if (controlLayersElement) {
+				controlLayersElement.addEventListener('click', function(event) {
+					var toggleLayerHeaderPointer = event.target.closest('.leaflet-layerstree-header-pointer span');
+					if (toggleLayerHeaderPointer) {
+						newLayersListHeight();
+					}
+				});
+			}
+            // Collapsed/Expanded at Start to apply new height
+            setTimeout(function() {
+                toggleLayerControl.click();
+            }, 10);
+            setTimeout(function() {
+                toggleLayerControl.click();
+            }, 10);
+            // Collapsed touch/small screen
+            var isSmallScreen = window.innerWidth < 650;
+            if (isSmallScreen) {
+                setTimeout(function() {
+                    controlLayersElement.classList.remove('leaflet-control-layers-expanded');
+                    isLayersListExpanded = !isLayersListExpanded;
+                }, 500);
+            }  
+        });       
         setBounds();
-        resetLabels([layer_Regions_of_interventions_3,layer_FAO_Intervention_districts_4,layer_Regions_of_interventionscopy_5]);
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Donor": "str","District": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Donor = document.createElement('div');
+            div_Donor.id = "div_Donor";
+            div_Donor.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Donor);
+            sel_Donor = document.createElement('select');
+            sel_Donor.multiple = true;
+            sel_Donor.size = 3;
+            sel_Donor.id = "sel_Donor";
+            var Donor_options_str = "<option value='' unselected></option>";
+            sel_Donor.onchange = function(){filterFunc()};
+            Donor_options_str  += '<option value="Canada">Canada</option>';
+            Donor_options_str  += '<option value="European Union">European Union</option>';
+            Donor_options_str  += '<option value="The Kingdom of Norway">The Kingdom of Norway</option>';
+            sel_Donor.innerHTML = Donor_options_str;
+            div_Donor.appendChild(sel_Donor);
+            var lab_Donor = document.createElement('div');
+            lab_Donor.innerHTML = 'Donor';
+            lab_Donor.className = 'filterlabel';
+            div_Donor.appendChild(lab_Donor);
+            var reset_Donor = document.createElement('div');
+            reset_Donor.innerHTML = 'clear filter';
+            reset_Donor.className = 'filterlabel';
+            reset_Donor.onclick = function() {
+                var options = document.getElementById("sel_Donor").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Donor.appendChild(reset_Donor);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_District = document.createElement('div');
+            div_District.id = "div_District";
+            div_District.className= "filterselect";
+            document.getElementById("menu").appendChild(div_District);
+            sel_District = document.createElement('select');
+            sel_District.multiple = true;
+            sel_District.size = 8;
+            sel_District.id = "sel_District";
+            var District_options_str = "<option value='' unselected></option>";
+            sel_District.onchange = function(){filterFunc()};
+            District_options_str  += '<option value="Bongo">Bongo</option>';
+            District_options_str  += '<option value="Builsa South">Builsa South</option>';
+            District_options_str  += '<option value="Bunkpurugu Nakpanduri">Bunkpurugu Nakpanduri</option>';
+            District_options_str  += '<option value="Central Gonja">Central Gonja</option>';
+            District_options_str  += '<option value="Kassena Nankana West">Kassena Nankana West</option>';
+            District_options_str  += '<option value="North East Gonja">North East Gonja</option>';
+            District_options_str  += '<option value="North Gonja">North Gonja</option>';
+            District_options_str  += '<option value="Sawla-Tuna-Kalba">Sawla-Tuna-Kalba</option>';
+            sel_District.innerHTML = District_options_str;
+            div_District.appendChild(sel_District);
+            var lab_District = document.createElement('div');
+            lab_District.innerHTML = 'District';
+            lab_District.className = 'filterlabel';
+            div_District.appendChild(lab_District);
+            var reset_District = document.createElement('div');
+            reset_District.innerHTML = 'clear filter';
+            reset_District.className = 'filterlabel';
+            reset_District.onclick = function() {
+                var options = document.getElementById("sel_District").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_District.appendChild(reset_District);
+        resetLabels([layer_Regionsofintervention_3,layer_FAOInterventiondistricts_4,layer_Regionsofinterventionsboundary_5]);
         map.on("zoomend", function(){
-            resetLabels([layer_Regions_of_interventions_3,layer_FAO_Intervention_districts_4,layer_Regions_of_interventionscopy_5]);
+            resetLabels([layer_Regionsofintervention_3,layer_FAOInterventiondistricts_4,layer_Regionsofinterventionsboundary_5]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Regions_of_interventions_3,layer_FAO_Intervention_districts_4,layer_Regions_of_interventionscopy_5]);
+            resetLabels([layer_Regionsofintervention_3,layer_FAOInterventiondistricts_4,layer_Regionsofinterventionsboundary_5]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Regions_of_interventions_3,layer_FAO_Intervention_districts_4,layer_Regions_of_interventionscopy_5]);
+            resetLabels([layer_Regionsofintervention_3,layer_FAOInterventiondistricts_4,layer_Regionsofinterventionsboundary_5]);
         });
         </script>        
     </body>
